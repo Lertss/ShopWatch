@@ -3,7 +3,9 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import ElementPlus from "element-plus"
-
 import "element-plus/theme-chalk/index.css"
+import axios from "axios";
 
-createApp(App).use(store).use(router).use(ElementPlus).mount('#app')
+axios.defaults.baseURL = 'http://127.0.0.1:8000'
+
+createApp(App).use(store).use(router, axios).use(ElementPlus).mount('#app')

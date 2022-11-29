@@ -1,2 +1,5 @@
 /watch_django/safety.txt
 /watch_django/db.sqlite3
+/watch_django/media/
+
+/watch_django/.idea/
