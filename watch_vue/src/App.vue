@@ -25,7 +25,7 @@
                   <span class="icon"><el-icon><ShoppingCartFull /></el-icon></span>
                   <span>Cart</span>
                 </router-link>
-
+  
               </div>
             </div>
           </div>
