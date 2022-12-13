@@ -2,8 +2,6 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 import store from '../store'
 
-import Home from '../views/HomeView.vue'
-
 import Product from '../views/Product.vue'
 import Category from '../views/Category.vue'
 import Search from '../views/Search.vue'
@@ -12,7 +10,7 @@ import SignUp from '../views/SignUp.vue'
 import LogIn from '../views/LogIn.vue'
 import MyAccount from '../views/MyAccount.vue'
 import HomeView from "@/views/HomeView.vue";
-// import Checkout from '../views/Checkout.vue'
+import Checkout from '../views/Checkout.vue'
 // import Success from '../views/Success.vue'
 
 const routes = [
@@ -62,14 +60,14 @@ const routes = [
   //   name: 'Success',
   //   component: Success
   // },
-  // {
-  //   path: '/cart/checkout',
-  //   name: 'Checkout',
-  //   component: Checkout,
-  //   meta: {
-  //     requireLogin: true
-  //   }
-  // },
+   {
+    path: '/cart/checkout',
+    name: 'Checkout',
+    component: Checkout,
+    meta: {
+      requireLogin: true
+    }
+  },
   {
     path: '/:category_slug/:product_slug',
     name: 'Product',
