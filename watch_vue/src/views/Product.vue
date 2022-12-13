@@ -28,8 +28,8 @@
 </template>
 
 <script>
-import axios from "axios";
-import { toast } from "bulma-toast";
+import axios from "axios"
+import { toast } from "bulma-toast"
 
 export default {
   name: 'Product',
@@ -53,6 +53,8 @@ export default {
           .get(`/api/v1/products/${category_slug}/${product_slug}`)
           .then(response => {
                 this.product = response.data
+
+            document.title = this.product.name + ' | Watch'
           })
           .catch(error => {
                 console.log(error)

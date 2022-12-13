@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import axios from "axios"
 
 export default {
   name: 'HomeView',
@@ -47,10 +47,13 @@ export default {
   },
   mounted() {
     this.getLatestProducts()
+
+    document.title = 'Home' + ' | Watch'
   },
   methods:{
-    getLatestProducts(){
-      axios
+    async getLatestProducts(){
+      this.$store.commit('setIsLoading', true)
+      await axios
           .get('/api/v1/latest-products/')
           .then(response => {
             this.latestProducts = response.data
@@ -58,16 +61,9 @@ export default {
           .catch(error => {
             console.log(error)
           })
+      this.$store.commit('setIsLoading', false)
     }
   }
 }
 </script>
 
-<style scoped>
-.image{
-    margin-top: -1.25rem;
-    margin-left: -1.25rem;
-    margin-right: -1.25rem;
-}
-
-</style>
