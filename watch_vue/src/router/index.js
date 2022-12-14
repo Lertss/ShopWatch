@@ -11,7 +11,7 @@ import LogIn from '../views/LogIn.vue'
 import MyAccount from '../views/MyAccount.vue'
 import HomeView from "@/views/HomeView.vue";
 import Checkout from '../views/Checkout.vue'
-// import Success from '../views/Success.vue'
+import Success from '../views/Success.vue'
 
 const routes = [
   {
@@ -55,11 +55,11 @@ const routes = [
     name: 'Cart',
     component: Cart
   },
-  // {
-  //   path: '/cart/success',
-  //   name: 'Success',
-  //   component: Success
-  // },
+  {
+    path: '/cart/success',
+    name: 'Success',
+    component: Success
+  },
    {
     path: '/cart/checkout',
     name: 'Checkout',
