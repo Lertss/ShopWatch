@@ -1,12 +1,11 @@
 from rest_framework import serializers
 
+from product.serializers import MangaSerializer
 from .models import Order, OrderItem
-
-from product.serializers import ProductSerializer
 
 
 class MyOrderItemSerializer(serializers.ModelSerializer):
-    product = ProductSerializer()
+    product = MangaSerializer()
 
     class Meta:
         model = OrderItem

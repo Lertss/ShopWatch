@@ -52,7 +52,7 @@ export default  {
             this.category = response.data
 
             document.title = this.category.name + ' | Watch'
-
+            console.log(response.data)
           })
           .catch(error => {
             console.log(error)

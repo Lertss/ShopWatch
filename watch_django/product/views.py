@@ -1,54 +1,88 @@
 from django.db.models import Q
 from django.http import Http404
 from django.shortcuts import render
+from rest_framework.permissions import IsAuthenticated
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 
-from .models import Product, Category
-from .serializers import ProductSerializer, CategorySerializer
+from .serializers import *
+from .models import Manga
 
 
-class LatestProductList(APIView):
+class MangaListHome(APIView):
     def get(self, request, format=None):
-        products = Product.objects.all()[0:4]
-        serializer = ProductSerializer(products, many=True)
+        manga = Manga.objects.all()
+        serializer_all = MangaSerializer(manga, many=True)
+        last_manga = Manga.objects.order_by('?')[:5]
+        serializer_lastmanga = MangaSerializer(last_manga, many=True)
+        last_glawa = Glawa.objects.all()
+        #
+        serializer_glawa = GlawaSerializer(last_glawa, many=True)
+
+        list_manga = []
+        # for id in serializer_all.data:
+        #     print(id['id'], id['name_movie'], id['get_thumbnail'])
+        #     list_manga.append(id['id'])
+        #     list_manga.append(id['name_movie'])
+        #     list_manga.append(id['get_thumbnail'])
+        #     rt = Manga.objects.all()
+        #     ser = MangaSerializer(rt, many=True)
+        #     for i in range(1, 4):
+        #         print(i["id"])
+        # print(list_manga)
+        serializer = [serializer_lastmanga.data, serializer_all.data, serializer_glawa.data]
+        return Response(serializer)
+
+
+class allManga(APIView):
+    def get(self, request):
+        manga = Manga.objects.all()
+        serializer = MangaSerializer(manga, many=True)
         return Response(serializer.data)
 
 
-class ProductDetail(APIView):
-    def get_object(self, category_slug, product_slug):
+class ShowManga(APIView):
+    def get_object(self, manga_slug):
         try:
-            return Product.objects.filter(category__slug=category_slug).get(slug=product_slug)
-        except Product.DoesNotExist:
+            return Manga.objects.get(slug=manga_slug)
+        except Manga.DoesNotExist:
             raise Http404
 
-    def get(self, request, category_slug, product_slug, format=None):
-        product = self.get_object(category_slug, product_slug)
-        serializer = ProductSerializer(product)
+    def get(self, request, manga_slug, format=None):
+        category = self.get_object(manga_slug)
+        serializer = MangaSerializer(category)
         return Response(serializer.data)
 
 
-class CategoryDetail(APIView):
-    def get_object(self, category_slug):
+# class ShowManga(APIView):
+#     def get(self):
+#         id = 1
+#         person = Manga.objects.get(pk=id)
+#         serializer = MangaSerializer(person, many=True)
+#         return Response(serializer.data)
+
+class ShowGlawa(APIView):  # ShowChapter
+    def get_object(self, manga_slug, glawa_slug):
         try:
-            return Category.objects.get(slug=category_slug)
-        except Category.DoesNotExist:
+            return Glawa.objects.filter(manga__slug=manga_slug).get(slug=glawa_slug)
+        except Glawa.DoesNotExist:
             raise Http404
 
-    def get(self, request, category_slug, format=None):
-        category = self.get_object(category_slug)
-        serializer = CategorySerializer(category)
+    def get(self, request, manga_slug, glawa_slug, format=None):
+        glawa = self.get_object(manga_slug, glawa_slug)
+        serializer = GlawaSerializer(glawa)
         return Response(serializer.data)
+
 
 @api_view(['POST'])
 def search(request):
     query = request.data.get('query', '')
 
     if query:
-        products = Product.objects.filter(Q(name__icontains=query) | Q(description__icontains=query))
-        serializer = ProductSerializer(products, many=True)
+        products = Manga.objects.filter(Q(name__icontains=query) | Q(description__icontains=query))
+        serializer = Manga(products, many=True)
         return Response(serializer.data)
     else:
         return Response({"products": []})
