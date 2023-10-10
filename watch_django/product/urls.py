@@ -3,8 +3,8 @@ from django.urls import path, include
 from product import views
 
 urlpatterns = [
-    path('home/', views.MangaListHome.as_view()),
-    path('allManga/', views.allManga.as_view()),
-    path('<slug:manga_slug>/<slug:glawa_slug>/', views.ShowGlawa.as_view()),
-    path('<slug:manga_slug>/', views.ShowManga.as_view())
+    path('latest-products/', views.LatestProductList.as_view()),
+    path('products/<slug:category_slug>/<slug:product_slug>/', views.ProductDetail.as_view()),
+    path('products/<slug:category_slug>/', views.CategoryDetail.as_view()),
+    path('products/search/', views.search),
 ]

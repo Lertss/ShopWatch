@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="cinema@localhost" uuid="b3fe2fd2-35ae-428c-bbe7-5b3f2af076de">
-      <driver-ref>postgresql</driver-ref>
+    <data-source source="LOCAL" name="Django default" uuid="a4f01e57-a634-4f9f-b007-2930b00f003f">
+      <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
-      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://localhost:5432/cinema</jdbc-url>
+      <imported>true</imported>
+      <remarks>$PROJECT_DIR$/watch_django/settings.py</remarks>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:D:\Project\watch\watch_django\db.sqlite3</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>

@@ -54,10 +54,9 @@ export default {
     async getLatestProducts(){
       this.$store.commit('setIsLoading', true)
       await axios
-          .get('/api/v1/home/')
+          .get('/api/v1/latest-products/')
           .then(response => {
             this.latestProducts = response.data
-            console.log(response.data)
               })
           .catch(error => {
             console.log(error)
