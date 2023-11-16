@@ -12,7 +12,12 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 import os
 from pathlib import Path
 import re
+import logging
 
+from dotenv import load_dotenv
+
+logging.basicConfig(format="%(levelname)s:%(message)s", level=logging.WARNING)
+load_dotenv()
 
 try:
     SEC_KEY = os.environ["SEC_KEY"]
